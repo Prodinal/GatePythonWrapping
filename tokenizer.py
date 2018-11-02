@@ -1,6 +1,6 @@
 import sys
 import os
-from subprocess import Popen, PIPE, check_output, call
+from subprocess import check_output
 import xml.etree.ElementTree as ET
 import spacy
 from spacy.tokens import Doc
@@ -8,7 +8,7 @@ from spacy.tokens import Doc
 
 class HuTokenizer():
     def __init__(self, vocab, temp_file_name='temp.txt',
-                 relative_path_to_quntoken='./quntoken'):
+                 relative_path_to_quntoken='Tokeniser/quntoken'):
         self.vocab = vocab
         self.temp_file_name = temp_file_name
         self.relative_path_to_quntoken = relative_path_to_quntoken
