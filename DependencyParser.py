@@ -6,7 +6,7 @@ from spacy.tokens import Doc, Span, Token
 class HuDependencyParser():
     def __init__(self,
                  nlp,
-                 label='POS',
+                 label='DependencyParser',
                  relative_path_to_magyarlanc='POSTagger/MagyarLanc3Wrapper.jar'):
         self.nlp = nlp
         self.label = label
