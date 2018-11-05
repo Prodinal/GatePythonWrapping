@@ -2,6 +2,7 @@ package wrapper;
 
 import java.util.Arrays;
 
+import edu.berkeley.nlp.PCFGLA.BerkeleyParser;
 import hu.ppke.itk.nlpg.docmodel.ISentence;
 import hu.ppke.itk.nlpg.purepos.ITagger;
 import hu.ppke.itk.nlpg.purepos.MorphTagger;
@@ -155,7 +156,12 @@ public class MagyarLanc3Wrapper {
 	}
 	
 	public static void main(String[] args) {
-		//MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
+		System.out.println("Initialising main class");
+		MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
+		System.out.println("Done");
+		System.out.println("Initialising berkeley parser");
+		MyBerkeleyParser tmp = MyBerkeleyParser.getInstance();
+		System.out.println("Done");
 		//System.out.println(main.testPurePos());
 	}
 }
