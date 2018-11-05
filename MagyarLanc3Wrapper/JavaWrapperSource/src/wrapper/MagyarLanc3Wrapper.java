@@ -1,7 +1,6 @@
-package test;
+package wrapper;
 
 import java.util.Arrays;
-import java.util.List;
 
 import hu.ppke.itk.nlpg.docmodel.ISentence;
 import hu.ppke.itk.nlpg.purepos.ITagger;
@@ -10,6 +9,7 @@ import hu.ppke.itk.nlpg.purepos.cli.configuration.Configuration;
 import hu.ppke.itk.nlpg.purepos.model.internal.CompiledModel;
 import hu.ppke.itk.nlpg.purepos.model.internal.RawModel;
 import hu.ppke.itk.nlpg.purepos.morphology.NullAnalyzer;
+import hu.u_szeged.cons.parser.MyBerkeleyParser;
 //import hu.u_szeged.pos.purepos.MyPurePos;
 import hu.u_szeged2.config.Config;
 import hu.u_szeged2.dep.parser.MyMateParser;
@@ -23,6 +23,7 @@ public class MagyarLanc3Wrapper {
 	private boolean USE_BEAM_SEARCH = false;
 	
 	private MyMateParser depParser;
+	private MyBerkeleyParser consParser;
 	
 	/*public String getHelloMessage() {
 		return "Hello world!";
@@ -128,8 +129,33 @@ public class MagyarLanc3Wrapper {
 		return result;
 	}
 	
+	public void initConsParser() {
+		if(consParser == null) {
+			consParser = MyBerkeleyParser.getInstance();			
+		}
+	}
+	
+	public String[][] consParseSentence(String[] words, String[] lemma, String[] pos, String[] feat){
+		if(consParser == null) {
+			initConsParser();
+		}
+		String[][] tokFeats = new String[words.length][4];
+		
+		for(int i = 0; i < words.length; i++) {
+			tokFeats[i][0] = words[i]; 
+			tokFeats[i][1] = lemma[i];
+			tokFeats[i][2] = pos[i];
+			tokFeats[i][3] = feat[i];
+		}
+		
+		String[][] result = consParser.parseSentence(tokFeats);
+		//returned result contains one array for each word provided, result[i][0-3] contains the passed parameters
+		//result[i][4] is the constituency tag for the token
+		return result;
+	}
+	
 	public static void main(String[] args) {
-		MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
+		//MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
 		//System.out.println(main.testPurePos());
 	}
 }

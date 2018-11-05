@@ -1,5 +1,5 @@
-POSTagger/JavaWrapperSource/bin/
-POSTagger/*.jar
+MagyarLanc3Wrapper/JavaWrapperSource/bin/
+MagyarLanc3Wrapper/*.jar
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

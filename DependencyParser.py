@@ -7,7 +7,7 @@ class HuDependencyParser():
     def __init__(self,
                  nlp,
                  label='DependencyParser',
-                 relative_path_to_magyarlanc='POSTagger/MagyarLanc3Wrapper.jar'):
+                 relative_path_to_magyarlanc='MagyarLanc3Wrapper/MagyarLanc3Wrapper.jar'):
         self.nlp = nlp
         self.label = label
         self.relative_path_to_magyarlanc = relative_path_to_magyarlanc
@@ -17,7 +17,7 @@ class HuDependencyParser():
         jar_path = os.path.join(dirname, self.relative_path_to_magyarlanc)
         os.environ['CLASSPATH'] = jar_path
         from jnius import autoclass
-        WRAPPERCLASS = autoclass('test.MagyarLanc3Wrapper')
+        WRAPPERCLASS = autoclass('wrapper.MagyarLanc3Wrapper')
         self.wrapper = WRAPPERCLASS()
         self.wrapper.initDepParser()
 
