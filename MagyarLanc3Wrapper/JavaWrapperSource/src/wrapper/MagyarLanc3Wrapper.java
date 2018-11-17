@@ -1,8 +1,14 @@
 package wrapper;
 
+import java.io.InputStream;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Properties;
 
-import edu.berkeley.nlp.PCFGLA.BerkeleyParser;
+import hu.nytud.hfst.Analyzer;
+import hu.nytud.hfst.Analyzer.Analyzation;
+import hu.nytud.hfst.Stemmer;
+import hu.nytud.hfst.Stemmer.Stem;
 import hu.ppke.itk.nlpg.docmodel.ISentence;
 import hu.ppke.itk.nlpg.purepos.ITagger;
 import hu.ppke.itk.nlpg.purepos.MorphTagger;
@@ -25,6 +31,8 @@ public class MagyarLanc3Wrapper {
 	
 	private MyMateParser depParser;
 	private MyBerkeleyParser consParser;
+	
+	private Stemmer stemmer;
 	
 	/*public String getHelloMessage() {
 		return "Hello world!";
@@ -65,6 +73,15 @@ public class MagyarLanc3Wrapper {
 	/*public String[][] morphParseSentence(String[] sentence){
 		return MyPurePos.getInstance().morphParseSentence(sentence);
 	}*/
+	
+	public class AnalyzationWrapper extends Analyzation{
+
+		public AnalyzationWrapper(Analyzer analyzer, String arg0) {
+			analyzer.super(arg0);
+			// TODO Auto-generated constructor stub
+		}
+		
+	}
 	
 	public void initPOSTagger() {
 		if (iTagger == null) {
@@ -155,13 +172,53 @@ public class MagyarLanc3Wrapper {
 		return result;
 	}
 	
+	public void initStemmer() {
+		Properties props = new Properties();
+		try {
+			//URL propsPath = new URL("resources/hfst-wrapper.props");
+			//FileInputStream is = new FileInputStream(propsPath.toURI().getSchemeSpecificPart());
+			
+			ClassLoader loader = getClass().getClassLoader();
+			InputStream is = loader.getResourceAsStream("hfst-wrapper.props");
+			props.load(is);
+			stemmer = new Stemmer(props);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String[] processStem(String analysis) {
+		if(stemmer == null) {
+			initStemmer();
+		}
+		
+		//Python hfst returns analysis in the correct format without Analyzer.parse or Analyzer.format
+		Stem stem = stemmer.process(analysis);
+		String[] result = new String[4];
+		result[0] = analysis;
+		result[1] = stem.szStem;
+		result[2] = stem.getTags(false);
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Initialising main class");
 		MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
 		System.out.println("Done");
-		System.out.println("Initialising berkeley parser");
-		MyBerkeleyParser tmp = MyBerkeleyParser.getInstance();
+		System.out.println("Initialising stemmer");
+		main.initStemmer();
 		System.out.println("Done");
+		System.out.println("Processing stem");
+		String[] result = main.processStem("vas[/N|mat]beton[/N][Nom]");
+		System.out.println("Done");
+		
+		System.out.println("analysis: " + result[0]);
+		System.out.println("formatted: " + result[1]);
+		System.out.println("lemma: " + result[2]);
+		System.out.println("tags: " + result[3]);
+		//System.out.println("Initialising berkeley parser");
+		//MyBerkeleyParser tmp = MyBerkeleyParser.getInstance();
+		//System.out.println("Done");
 		//System.out.println(main.testPurePos());
 	}
 }
