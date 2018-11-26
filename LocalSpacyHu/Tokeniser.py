@@ -6,7 +6,7 @@ import spacy
 from spacy.tokens import Doc
 
 
-class HuTokenizer():
+class HuTokeniser():
     def __init__(self, vocab, temp_file_name='temp.txt',
                  relative_path_to_quntoken='Tokeniser/quntoken'):
         self.vocab = vocab
@@ -35,7 +35,7 @@ class HuTokenizer():
 if __name__ == '__main__':
     sentence = 'Szeretem a piros almákat mert nem savanyúak.'
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
 
     doc = nlp(sentence)
     for token in doc:

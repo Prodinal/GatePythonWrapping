@@ -27,12 +27,12 @@ class HuDependencyParser(MagyarLanc3BaseComponent):
         return doc
 
 if __name__ == '__main__':
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
     from LocalSpacyHu import HuPOSTagger
 
     debug_text = 'Autonóm autók hárítják a biztosítás terhét gyártók felé'
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
     POSTagger = HuPOSTagger(nlp)
     dependency_parser = HuDependencyParser(nlp)
     nlp.add_pipe(POSTagger)

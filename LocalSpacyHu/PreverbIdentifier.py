@@ -19,13 +19,13 @@ class HuPreverbIdentifier():
         return doc
 
 if __name__ == '__main__':
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
     from LocalSpacyHu import HuPOSTagger
     from LocalSpacyHu import HuDependencyParser
 
     debug_text = 'El is áztam amikor került elő a repcsi'
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
 
     POSTagger = HuPOSTagger(nlp)
     nlp.add_pipe(POSTagger)

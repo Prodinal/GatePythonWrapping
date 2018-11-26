@@ -35,7 +35,7 @@ class HUWordToVec(object):
 
 if __name__ == '__main__':
     import spacy
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
 
     class Container(object):
         pass
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     print(len(vec1))  # expected: 300
 
     nlp = spacy.blank('en')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
     nlp.add_pipe(HUWordToVec(), last=True)
     doc = nlp('Alma körte barack')
     for token in doc:

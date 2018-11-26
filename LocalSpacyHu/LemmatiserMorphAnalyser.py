@@ -48,11 +48,11 @@ class HuLemmatiserMorphAnalyser(MagyarLanc3BaseComponent):
 
 
 if __name__ == '__main__':
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
 
     debug_text = 'Elmentem játszani a kecskékkel'
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
     morph_analyser = HuLemmatiserMorphAnalyser(nlp)
     nlp.add_pipe(morph_analyser)
 

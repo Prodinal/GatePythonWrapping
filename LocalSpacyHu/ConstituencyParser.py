@@ -24,12 +24,12 @@ class HuConstituencyParser(MagyarLanc3BaseComponent):
         return doc
 
 if __name__ == '__main__':
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
     from LocalSpacyHu import HuPOSTagger
 
     debug_text = 'A kék alma nagyon gyorsan elrepült a sima köcsög mellett'
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
     POSTagger = HuPOSTagger(nlp)
     constituency_parser = HuConstituencyParser(nlp)
     nlp.add_pipe(POSTagger)

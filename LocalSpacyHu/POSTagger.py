@@ -26,10 +26,10 @@ class HuPOSTagger(MagyarLanc3BaseComponent):
 
 
 if __name__ == '__main__':
-    from LocalSpacyHu import HuTokenizer
+    from LocalSpacyHu import HuTokeniser
 
     nlp = spacy.blank('hu')
-    nlp.tokenizer = HuTokenizer(nlp.vocab)
+    nlp.tokenizer = HuTokeniser(nlp.vocab)
     nlp.add_pipe(HuPOSTagger(nlp), last=True)
     doc = nlp('A piros almákat szeretem.')
 
