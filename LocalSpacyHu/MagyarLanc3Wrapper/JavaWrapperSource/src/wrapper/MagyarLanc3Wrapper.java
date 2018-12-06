@@ -202,20 +202,20 @@ public class MagyarLanc3Wrapper {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Initialising main class");
-		MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
-		System.out.println("Done");
-		System.out.println("Initialising stemmer");
-		main.initStemmer();
-		System.out.println("Done");
-		System.out.println("Processing stem");
-		String[] result = main.processStem("vas[/N|mat]beton[/N][Nom]");
-		System.out.println("Done");
+		//System.out.println("Initialising main class");
+		//MagyarLanc3Wrapper main = new MagyarLanc3Wrapper();
+		//System.out.println("Done");
+		//System.out.println("Initialising stemmer");
+		//main.initStemmer();
+		//System.out.println("Done");
+		//System.out.println("Processing stem");
+		//String[] result = main.processStem("vas[/N|mat]beton[/N][Nom]");
+		//System.out.println("Done");
 		
-		System.out.println("analysis: " + result[0]);
-		System.out.println("formatted: " + result[1]);
-		System.out.println("lemma: " + result[2]);
-		System.out.println("tags: " + result[3]);
+		//System.out.println("analysis: " + result[0]);
+		//System.out.println("formatted: " + result[1]);
+		//System.out.println("lemma: " + result[2]);
+		//System.out.println("tags: " + result[3]);
 		//System.out.println("Initialising berkeley parser");
 		//MyBerkeleyParser tmp = MyBerkeleyParser.getInstance();
 		//System.out.println("Done");
